@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ndegwa. Notes on insurance product design and pricing.</title>
+
+<!--
+  HOW TO ADD A NEW PUBLICATION
+  Inside <ol class="pub-list">, copy one <li class="pub"> block.
+  Set data-category to ONE of:
+     life-individual          (Life Insurance, Individual Life)
+     life-retirement-pre      (Life Insurance, Retirement Pre-retirement)
+     life-retirement-post     (Life Insurance, Retirement Post-retirement)
+     life-group               (Life Insurance, Group Life)
+     general                  (General Insurance)
+     banking                  (Banking and Investment)
+     academia                 (Academia)
+  Update title, summary, year, and href. Numbering happens automatically.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #F4EFE6;
+    --paper-tint: #ECE5D8;
+    --ink: #1A1614;
+    --ink-soft: #4A4239;
+    --ink-mute: #8C8074;
+    --rule: #C9BFAB;
+
+    /* Type scale, restrained and consistent */
+    --fs-display: 48px;
+    --fs-h2: 32px;
+    --fs-h3: 22px;
+    --fs-body: 18px;
+    --fs-small: 15px;
+    --fs-label: 13px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'EB Garamond', Garamond, 'Adobe Garamond Pro', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: var(--fs-body);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ───── NAV ───── */
+  nav.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 239, 230, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 22px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .brand span { color: var(--ink-mute); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links > li { position: relative; }
+
+  .nav-links a, .nav-links button.nav-trigger {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-family: inherit;
+    font-size: var(--fs-small);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s ease;
+    position: relative;
+  }
+  .nav-links a:hover, .nav-links button.nav-trigger:hover { color: var(--ink); }
+
+  .nav-trigger .caret {
+    font-size: 9px;
+    margin-top: 2px;
+    transition: transform 0.2s ease;
+  }
+
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: -16px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    min-width: 260px;
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    box-shadow: 0 12px 36px rgba(26,22,20,0.08);
+    list-style: none;
+  }
+
+  .nav-links li:hover .dropdown,
+  .nav-links li:focus-within .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .nav-links li:hover .nav-trigger .caret { transform: rotate(180deg); }
+
+  .dropdown li { margin: 0; }
+  .dropdown a {
+    display: block;
+    padding: 10px 14px;
+    font-size: var(--fs-small);
+    font-weight: 400;
+    color: var(--ink-soft);
+    border-radius: 2px;
+  }
+  .dropdown a:hover { background: var(--paper-tint); color: var(--ink); }
+
+  .dropdown .group-label {
+    font-size: var(--fs-label);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-mute);
+    padding: 12px 14px 6px;
+    text-transform: uppercase;
+  }
+
+  .menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: var(--ink);
+    font-family: inherit;
+  }
+
+  /* ───── HERO ───── */
+  .hero {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 110px 40px 80px;
+  }
+
+  .eyebrow {
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+    margin-bottom: 32px;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.1s forwards;
+  }
+
+  h1.hero-title {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: var(--fs-display);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    max-width: 22ch;
+    margin-bottom: 32px;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.25s forwards;
+  }
+
+  .hero-lede {
+    max-width: 60ch;
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.4s forwards;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.55s forwards;
+    flex-wrap: wrap;
+  }
+  .hero-meta div { font-size: var(--fs-small); }
+  .hero-meta span {
+    display: block;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: var(--fs-label);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  /* ───── SECTIONS ───── */
+  section {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .section-head h2 {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: var(--fs-h2);
+    letter-spacing: -0.005em;
+  }
+  .section-head .count {
+    font-size: var(--fs-label);
+    color: var(--ink-mute);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ───── TABS ───── */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--ink-soft);
+    padding: 9px 20px;
+    font-family: inherit;
+    font-size: var(--fs-small);
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+    letter-spacing: 0.01em;
+  }
+  .tab:hover { background: var(--paper-tint); color: var(--ink); }
+  .tab.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .subtabs {
+    display: none;
+    gap: 4px;
+    margin: 8px 0 32px 0;
+    padding: 14px 18px;
+    background: var(--paper-tint);
+    border-radius: 4px;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid var(--rule);
+  }
+  .subtabs.visible { display: flex; }
+  .subtabs-label {
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-mute);
+    font-weight: 500;
+    margin-right: 14px;
+  }
+  .subtab {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--ink-soft);
+    padding: 6px 14px;
+    font-family: inherit;
+    font-size: var(--fs-small);
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+  }
+  .subtab:hover { background: var(--paper); color: var(--ink); }
+  .subtab.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .tabs-spacer { margin-bottom: 16px; }
+
+  /* ───── PUBLICATIONS LIST ───── */
+  .pub-list {
+    list-style: none;
+    counter-reset: pub;
+  }
+
+  .pub {
+    counter-increment: pub;
+    display: grid;
+    grid-template-columns: 60px 1fr 100px;
+    gap: 28px;
+    align-items: baseline;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.2s ease;
+  }
+  .pub.hidden { display: none; }
+  .pub:hover { background: rgba(236, 229, 216, 0.4); }
+
+  .pub-num {
+    font-size: var(--fs-label);
+    color: var(--ink-mute);
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    padding-left: 8px;
+  }
+  .pub-num::before {
+    content: counter(pub, decimal-leading-zero) ".";
+  }
+
+  .pub-main { min-width: 0; }
+
+  .pub-cat {
+    display: inline-block;
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-mute);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .pub-title {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: var(--fs-h3);
+    line-height: 1.35;
+    letter-spacing: -0.003em;
+    margin-bottom: 8px;
+  }
+  .pub-title a {
+    color: var(--ink);
+    text-decoration: none;
+    background-image: linear-gradient(var(--ink), var(--ink));
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.3s ease;
+    padding-bottom: 2px;
+  }
+  .pub-title a:hover {
+    background-size: 100% 1px;
+  }
+
+  .pub-desc {
+    color: var(--ink-soft);
+    font-size: var(--fs-body);
+    line-height: 1.55;
+    max-width: 65ch;
+  }
+
+  .pub-year {
+    font-size: var(--fs-small);
+    color: var(--ink-mute);
+    text-align: right;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding-right: 8px;
+  }
+
+  @media (max-width: 720px) {
+    .pub {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 24px 0;
+    }
+    .pub-num { padding-left: 0; }
+    .pub-year { text-align: left; padding-right: 0; }
+  }
+
+  .empty-state {
+    padding: 80px 20px;
+    text-align: center;
+    color: var(--ink-mute);
+    font-size: var(--fs-body);
+    display: none;
+  }
+  .empty-state.visible { display: block; }
+
+  /* ───── ABOUT ───── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  @media (max-width: 800px) {
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .about-label {
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-mute);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  .about-text {
+    font-size: var(--fs-body);
+    line-height: 1.7;
+    color: var(--ink);
+    max-width: 65ch;
+  }
+  .about-text p + p { margin-top: 18px; }
+
+  /* ───── FOOTER ───── */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    margin-top: 80px;
+  }
+  .footer-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 100px 40px 40px;
+  }
+  .footer-title {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: var(--fs-display);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    margin-bottom: 56px;
+    max-width: 20ch;
+  }
+
+  .footer-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 56px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(244, 239, 230, 0.15);
+  }
+  .footer-contacts a {
+    color: var(--paper);
+    text-decoration: none;
+    font-size: var(--fs-body);
+    border-bottom: 1px solid rgba(244, 239, 230, 0.3);
+    padding-bottom: 4px;
+    transition: border-color 0.2s ease;
+  }
+  .footer-contacts a:hover { border-color: var(--paper); }
+  .footer-contacts .label {
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(244, 239, 230, 0.5);
+    display: block;
+    margin-bottom: 8px;
+    border: none;
+    padding: 0;
+    font-weight: 500;
+  }
+  .footer-bottom {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--fs-label);
+    color: rgba(244, 239, 230, 0.5);
+    gap: 16px;
+    flex-wrap: wrap;
+    letter-spacing: 0.04em;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 860px) {
+    .nav-inner, .hero, section, .footer-inner { padding-left: 24px; padding-right: 24px; }
+    .nav-links { display: none; }
+    .menu-btn { display: block; }
+    .nav-links.open {
+      display: flex;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      background: var(--paper);
+      padding: 24px;
+      border-bottom: 1px solid var(--rule);
+      gap: 8px;
+    }
+    .nav-links.open .dropdown {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      border: none;
+      padding: 0 0 0 12px;
+      box-shadow: none;
+      background: transparent;
+      min-width: 0;
+    }
+    .nav-links.open > li { width: 100%; }
+    .section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+    :root { --fs-display: 38px; --fs-h2: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ TOP NAV ═══════════════ -->
+<nav class="topbar">
+  <div class="nav-inner">
+    <a href="#top" class="brand">Ndegwa<span>.</span></a>
+    <button class="menu-btn" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">Menu</button>
+    <ul class="nav-links">
+      <li>
+        <button class="nav-trigger" data-filter="life">Life Insurance <span class="caret">▾</span></button>
+        <ul class="dropdown">
+          <li class="group-label">Life Insurance</li>
+          <li><a href="#work" data-filter="life-individual">Individual Life</a></li>
+          <li><a href="#work" data-filter="life-retirement-pre">Retirement, Pre-retirement</a></li>
+          <li><a href="#work" data-filter="life-retirement-post">Retirement, Post-retirement</a></li>
+          <li><a href="#work" data-filter="life-group">Group Life</a></li>
+        </ul>
+      </li>
+      <li><a href="#work" data-filter="general">General Insurance</a></li>
+      <li><a href="#work" data-filter="banking">Banking and Investment</a></li>
+      <li><a href="#work" data-filter="academia">Academia</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero" id="top">
+  <div class="eyebrow">Student Actuary &nbsp;·&nbsp; Product Development and Pricing</div>
+  <h1 class="hero-title">Notes on insurance product design, pricing, and the gaps between markets.</h1>
+  <p class="hero-lede">
+    I am Ndegwa, a student actuary writing about new product ideas, revamps
+    of existing ones, comparisons across markets, and the gap analyses that
+    sit underneath all of it. This is a working archive of publications and
+    notes across life insurance, general insurance, banking and investment,
+    and academic study.
+  </p>
+  <div class="hero-meta">
+    <div><span>Focus</span>Product and Pricing</div>
+    <div><span>Domain</span>Financial Services</div>
+    <div><span>Updated</span>2026</div>
+  </div>
+</header>
+
+<!-- ═══════════════ PUBLICATIONS ═══════════════ -->
+<section id="work">
+  <div class="section-head">
+    <h2>Publications and Notes</h2>
+    <span class="count" id="workCount">10 of 10 visible</span>
+  </div>
+
+  <div class="tabs" role="tablist" id="primaryTabs">
+    <button class="tab active" data-filter="all">All</button>
+    <button class="tab" data-filter="life">Life Insurance</button>
+    <button class="tab" data-filter="general">General Insurance</button>
+    <button class="tab" data-filter="banking">Banking and Investment</button>
+    <button class="tab" data-filter="academia">Academia</button>
+  </div>
+
+  <div class="subtabs" id="lifeSubtabs">
+    <span class="subtabs-label">Life</span>
+    <button class="subtab active" data-subfilter="life">All life</button>
+    <button class="subtab" data-subfilter="life-individual">Individual Life</button>
+    <button class="subtab" data-subfilter="life-retirement-pre">Retirement: Pre</button>
+    <button class="subtab" data-subfilter="life-retirement-post">Retirement: Post</button>
+    <button class="subtab" data-subfilter="life-group">Group Life</button>
+  </div>
+
+  <div class="tabs-spacer"></div>
+
+  <ol class="pub-list" id="workGrid">
+
+    <li class="pub" data-category="life-individual">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Life Insurance · Individual</div>
+        <h3 class="pub-title"><a href="#">Indexed universal life: pricing assumptions in volatile markets</a></h3>
+        <p class="pub-desc">A pricing walkthrough and stress test of an IUL design under shifting equity and rate scenarios.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="life-retirement-pre">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Life Insurance · Retirement, Pre</div>
+        <h3 class="pub-title"><a href="#">Deferred annuities in East Africa: a product gap analysis</a></h3>
+        <p class="pub-desc">Comparing accumulation phase retirement products across South Africa, Kenya, and the United Kingdom, with notes on the gaps and why they persist.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="life-retirement-post">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Life Insurance · Retirement, Post</div>
+        <h3 class="pub-title"><a href="#">Immediate annuities versus living annuities: a Kenyan retiree's decision frame</a></h3>
+        <p class="pub-desc">Comparing decumulation options with worked examples on mortality, longevity, and income volatility.</p>
+      </div>
+      <div class="pub-year">2025</div>
+    </li>
+
+    <li class="pub" data-category="life-group">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Life Insurance · Group</div>
+        <h3 class="pub-title"><a href="#">Group life experience rating for SMEs</a></h3>
+        <p class="pub-desc">A pricing approach for thin data schemes, covering credibility weighting and revamp ideas for the SME segment.</p>
+      </div>
+      <div class="pub-year">2025</div>
+    </li>
+
+    <li class="pub" data-category="general">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">General Insurance</div>
+        <h3 class="pub-title"><a href="#">Parametric crop insurance: market assessment for smallholders</a></h3>
+        <p class="pub-desc">A product feasibility study covering index design, basis risk, and distribution pathways.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="general">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">General Insurance</div>
+        <h3 class="pub-title"><a href="#">Motor telematics: lessons from the UK for emerging markets</a></h3>
+        <p class="pub-desc">What usage based insurance products got right, what did not translate, and where the local opportunity sits.</p>
+      </div>
+      <div class="pub-year">2025</div>
+    </li>
+
+    <li class="pub" data-category="banking">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Banking and Investment</div>
+        <h3 class="pub-title"><a href="#">Bancassurance unit linked savings: revamp ideas</a></h3>
+        <p class="pub-desc">Where current unit linked products fail customers, with a redesigned charge structure and clearer outcomes.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="banking">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Banking and Investment</div>
+        <h3 class="pub-title"><a href="#">Sharia compliant investment products: a gap analysis</a></h3>
+        <p class="pub-desc">Mapping local takaful and Islamic finance offerings against unmet demand in the retail segment.</p>
+      </div>
+      <div class="pub-year">2025</div>
+    </li>
+
+    <li class="pub" data-category="academia">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Academia</div>
+        <h3 class="pub-title"><a href="#">Notes on Loss Models (Klugman), Chapter 7</a></h3>
+        <p class="pub-desc">Working through frequency severity models with applied examples from short term insurance.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="academia">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Academia</div>
+        <h3 class="pub-title"><a href="#">IFRS 17: study notes and product design implications</a></h3>
+        <p class="pub-desc">A reading log on the standard and what it means for how new products get built and measured.</p>
+      </div>
+      <div class="pub-year">2025</div>
+    </li>
+
+  </ol>
+  <div class="empty-state" id="emptyState">No publications in this category yet.</div>
+</section>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section id="about">
+  <div class="section-head">
+    <h2>About</h2>
+    <span class="count">Practice</span>
+  </div>
+  <div class="about-grid">
+    <div class="about-label">A few notes<br>about the practice</div>
+    <div class="about-text">
+      <p>
+        I am Ndegwa, a student actuary with a focus on product development
+        and pricing across life insurance, general insurance, and banking
+        and investment products.
+      </p>
+      <p>
+        This site is where I share working ideas: new product concepts,
+        comparisons between markets, revamps of existing products, and the
+        market research and gap analyses behind them. It also doubles as my
+        academic notebook, with study notes and reading logs as I work
+        through the actuarial syllabus.
+      </p>
+      <p>
+        If something here is useful, or you would like to discuss a product
+        idea, please reach out.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer id="contact">
+  <div class="footer-inner">
+    <h2 class="footer-title">Let us talk about products.</h2>
+    <div class="footer-contacts">
+      <div>
+        <span class="label">Email</span>
+        <a href="mailto:hello@ndegwa.com">hello@ndegwa.com</a>
+      </div>
+      <div>
+        <span class="label">LinkedIn</span>
+        <a href="#">linkedin.com/in/ndegwa</a>
+      </div>
+      <div>
+        <span class="label">Writing</span>
+        <a href="#">Newsletter</a>
+      </div>
+      <div>
+        <span class="label">Elsewhere</span>
+        <a href="#">GitHub</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Ndegwa</span>
+      <span>Notes from a student actuary</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const primaryTabs = document.querySelectorAll('.tab');
+  const subtabs = document.querySelectorAll('.subtab');
+  const subtabsBar = document.getElementById('lifeSubtabs');
+  const cards = document.querySelectorAll('.pub');
+  const counter = document.getElementById('workCount');
+  const emptyState = document.getElementById('emptyState');
+
+  let activePrimary = 'all';
+  let activeSub = 'life';
+
+  function applyFilter() {
+    let visible = 0;
+    cards.forEach(card => {
+      const cat = card.dataset.category;
+      let show = false;
+      if (activePrimary === 'all') {
+        show = true;
+      } else if (activePrimary === 'life') {
+        if (activeSub === 'life') show = cat.startsWith('life-');
+        else show = cat === activeSub;
+      } else {
+        show = cat === activePrimary;
+      }
+      card.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    counter.textContent = visible + ' of ' + cards.length + ' visible';
+    emptyState.classList.toggle('visible', visible === 0);
+    subtabsBar.classList.toggle('visible', activePrimary === 'life');
+  }
+
+  primaryTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      primaryTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      activePrimary = tab.dataset.filter;
+      if (activePrimary === 'life') {
+        activeSub = 'life';
+        subtabs.forEach(s => s.classList.toggle('active', s.dataset.subfilter === 'life'));
+      }
+      applyFilter();
+    });
+  });
+
+  subtabs.forEach(sub => {
+    sub.addEventListener('click', () => {
+      subtabs.forEach(s => s.classList.remove('active'));
+      sub.classList.add('active');
+      activeSub = sub.dataset.subfilter;
+      applyFilter();
+    });
+  });
+
+  document.querySelectorAll('[data-filter]').forEach(el => {
+    if (el.tagName === 'A' || el.classList.contains('nav-trigger')) {
+      el.addEventListener('click', () => {
+        const filter = el.dataset.filter;
+        if (!filter) return;
+        if (filter.startsWith('life-')) {
+          activePrimary = 'life';
+          activeSub = filter;
+          primaryTabs.forEach(t => t.classList.toggle('active', t.dataset.filter === 'life'));
+          subtabs.forEach(s => s.classList.toggle('active', s.dataset.subfilter === filter));
+        } else {
+          activePrimary = filter;
+          primaryTabs.forEach(t => t.classList.toggle('active', t.dataset.filter === filter));
+          if (filter === 'life') {
+            activeSub = 'life';
+            subtabs.forEach(s => s.classList.toggle('active', s.dataset.subfilter === 'life'));
+          }
+        }
+        applyFilter();
+      });
+    }
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
+  });
+</script>
+
+</body>
+</html>
