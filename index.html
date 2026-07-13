@@ -551,6 +551,82 @@
     .section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
     :root { --fs-display: 38px; --fs-h2: 28px; }
   }
+
+  /* ───── PRODUCTS ───── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 720px) {
+    .products-grid { grid-template-columns: 1fr; }
+  }
+
+  .product-card {
+    padding: 28px;
+    border: 1px solid var(--rule);
+    background: transparent;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .product-card:hover { background: var(--paper-tint); border-color: var(--ink-mute); }
+
+  .product-category {
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-mute);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .product-name {
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    margin-bottom: 12px;
+    line-height: 1.3;
+    letter-spacing: -0.003em;
+  }
+
+  .product-summary {
+    font-size: var(--fs-body);
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+
+  .product-link {
+    display: inline-block;
+    font-size: var(--fs-small);
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--ink-mute);
+    transition: text-decoration-color 0.2s ease;
+  }
+  .product-link:hover { text-decoration-color: var(--ink); }
+
+  .product-status {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-mute);
+    font-weight: 500;
+  }
+
+  .products-subcategory {
+    margin-bottom: 56px;
+  }
+  .products-subcategory h3 {
+    font-size: var(--fs-h2);
+    font-weight: 600;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+    letter-spacing: -0.005em;
+  }
 </style>
 </head>
 <body>
@@ -574,6 +650,7 @@
       <li><a href="#work" data-filter="general">General Insurance</a></li>
       <li><a href="#work" data-filter="banking">Banking and Investment</a></li>
       <li><a href="#work" data-filter="esg">ESG</a></li>
+      <li><a href="#products">Products</a></li>
       <li><a href="#work" data-filter="academia">Academia</a></li>
       <li><a href="#about">About</a></li>
     </ul>
@@ -751,6 +828,145 @@
   <div class="empty-state" id="emptyState">No publications in this category yet.</div>
 </section>
 
+<!-- ═══════════════ PRODUCTS ═══════════════ -->
+<section id="products">
+  <div class="section-head">
+    <h2>Products</h2>
+    <span class="count">Life Insurance</span>
+  </div>
+
+  <!-- Retail Individual Life -->
+  <div class="products-subcategory">
+    <h3>Individual Life Insurance</h3>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <div class="product-category">Individual · Retail</div>
+        <h4 class="product-name">Whole of Life</h4>
+        <p class="product-summary">Permanent life coverage with level premiums and lifelong protection, available in both KES and USD for East African markets.</p>
+        <a href="products/whole-of-life-spec.pdf" class="product-link">Product Specification</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-category">Individual · Retail</div>
+        <h4 class="product-name">Level Term Assurance</h4>
+        <p class="product-summary">Fixed-term life protection with level premiums for 10 to 25 year terms, available in KES and USD with guaranteed payouts.</p>
+        <a href="products/level-term-spec.pdf" class="product-link">Product Specification</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-category">Individual · Retail</div>
+        <h4 class="product-name">Investure</h4>
+        <p class="product-summary">Investment-linked endowment-style savings product with protection benefits, available in KES and USD for medium to long-term wealth building.</p>
+        <a href="products/investure-spec.pdf" class="product-link">Product Specification</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-category">Individual · Retail</div>
+        <h4 class="product-name">Endowment Product</h4>
+        <p class="product-summary">Savings-linked life cover combining protection with profit participation and maturity benefits, available in KES and USD versions.<span class="product-status">Priced, not yet launched</span></p>
+        <a href="products/endowment-product-spec.pdf" class="product-link">Product Specification</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-category">Individual · Retail</div>
+        <h4 class="product-name">Thabiti Life Plan</h4>
+        <p class="product-summary">Flexible protection and savings combination offering term life cover with optional savings components in KES and USD.</p>
+        <a href="products/thabiti-spec.pdf" class="product-link">Product Specification</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-category">Individual · Retail</div>
+        <h4 class="product-name">Critical Illness Cover</h4>
+        <p class="product-summary">Lump-sum protection against major health events like cancer and stroke, available standalone or as a rider to life policies.<span class="product-status">Priced, not yet launched</span></p>
+        <a href="products/critical-illness-spec.pdf" class="product-link">Product Specification</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-category">Individual · Retail</div>
+        <h4 class="product-name">Funeral Expense Cover</h4>
+        <p class="product-summary">Affordable final expense protection designed for accessibility, ensuring dignity in passing across income segments.<span class="product-status">Priced, not yet launched</span></p>
+        <a href="products/funeral-spec.pdf" class="product-link">Product Specification</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Retirement Products -->
+  <div class="products-subcategory">
+    <h3>Retirement Solutions</h3>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <div class="product-category">Retirement · Income</div>
+        <h4 class="product-name">Annuity</h4>
+        <p class="product-summary">Guaranteed income for life from retirement savings, providing reliable pension payments with longevity risk protection.</p>
+        <a href="products/annuity-spec.pdf" class="product-link">Product Specification</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-category">Retirement · Decumulation</div>
+        <h4 class="product-name">Income Drawdown Fund</h4>
+        <p class="product-summary">Flexible retirement income solution allowing periodic withdrawals from invested lump sum with minimum 4% guaranteed return plus bonuses.</p>
+        <a href="products/income-drawdown-spec.pdf" class="product-link">Product Specification</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Group Life Products -->
+  <div class="products-subcategory">
+    <h3>Group Life Insurance</h3>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <div class="product-category">Group · Loan Protection</div>
+        <h4 class="product-name">Group Mortgage Protection Policy</h4>
+        <p class="product-summary">Specialized loan protection for mortgages and high-value loans, covering death, disability, and job loss to protect lenders and borrowers.</p>
+        <a href="products/group-mortgage-spec.pdf" class="product-link">Product Specification</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-category">Group · Loan Protection</div>
+        <h4 class="product-name">Group Credit Life</h4>
+        <p class="product-summary">Credit line protection for short-term loans covering death, disability, and unemployment, with optional critical illness and funeral benefits.</p>
+        <a href="products/group-credit-spec.pdf" class="product-link">Product Specification</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Tools & Infrastructure -->
+  <div class="products-subcategory">
+    <h3>Operational Systems and Infrastructure</h3>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <div class="product-category">Infrastructure · Customer Tool</div>
+        <h4 class="product-name">Automated PRS Calculator</h4>
+        <p class="product-summary">Interactive tool for Personal Retirement Scheme projections, enabling customers to model contributions, returns, and retirement income scenarios.</p>
+        <a href="products/prs-calculator-spec.pdf" class="product-link">Documentation</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-category">Infrastructure · Automation</div>
+        <h4 class="product-name">Reinsurance Automation Tool</h4>
+        <p class="product-summary">Internal systems and automation for streamlined reinsurance placement, underwriting, and settlement processes.</p>
+        <a href="products/reinsurance-automation-spec.pdf" class="product-link">Documentation</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-category">Infrastructure · Automation</div>
+        <h4 class="product-name">Valuation Data Automation Tool</h4>
+        <p class="product-summary">Automated data pipeline for actuarial valuations, enhancing accuracy, auditability, and timeliness of financial and actuarial reporting.</p>
+        <a href="products/valuation-automation-spec.pdf" class="product-link">Documentation</a>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
 <!-- ═══════════════ ABOUT ═══════════════ -->
 <section id="about">
   <div class="section-head">
@@ -766,11 +982,12 @@
         and investment products.
       </p>
       <p>
-        This site is where I share working ideas: new product concepts,
-        comparisons between markets, revamps of existing products, and the
-        market research and gap analyses behind them. It also doubles as my
-        academic notebook, with study notes and reading logs as I work
-        through the actuarial syllabus.
+        This site has three sections. Publications contains my research, gap
+        analyses, pricing studies, and market comparisons across insurance
+        products. Products showcases the life insurance products I have priced
+        and developed, spanning individual protection, retirement solutions,
+        and group coverage. Academia holds my study notes and reading logs as
+        I work through the actuarial syllabus.
       </p>
       <p>
         If something here is useful, or you would like to discuss a product
