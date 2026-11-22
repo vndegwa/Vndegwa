@@ -606,6 +606,21 @@
   }
   .product-link:hover { text-decoration-color: var(--ink); }
 
+  .pub-title .pub-pending { color: var(--ink); }
+  .pub-status {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-mute);
+    font-weight: 500;
+    vertical-align: middle;
+  }
+  .role-list { list-style: none; margin-top: 4px; }
+  .role-list li { padding: 10px 0; border-top: 1px solid var(--rule); font-size: var(--fs-small); color: var(--ink-soft); }
+  .role-list li:last-child { border-bottom: 1px solid var(--rule); }
+  .role-list strong { color: var(--ink); font-weight: 600; }
   .product-status {
     display: inline-block;
     margin-left: 8px;
@@ -650,7 +665,9 @@
       <li><a href="#work" data-filter="general">General Insurance</a></li>
       <li><a href="#work" data-filter="banking">Banking and Investment</a></li>
       <li><a href="#work" data-filter="esg">ESG</a></li>
+      <li><a href="#work" data-filter="policy">Policy</a></li>
       <li><a href="#products">Products</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#work" data-filter="academia">Academia</a></li>
       <li><a href="#about">About</a></li>
     </ul>
@@ -662,16 +679,18 @@
   <div class="eyebrow">Student Actuary &nbsp;·&nbsp; Product Development and Pricing</div>
   <h1 class="hero-title">Notes on insurance product design, pricing, and the gaps between markets.</h1>
   <p class="hero-lede">
-    I am Ndegwa, a student actuary writing about new product ideas, revamps
-    of existing ones, comparisons across markets, and the gap analyses that
-    sit underneath all of it. This is a working archive of publications and
-    notes across life insurance, general insurance, banking and investment,
-    and academic study.
+    I am Ndegwa, a student actuary working in life insurance pricing and
+    product development in Nairobi, and Assistant Editor in Chief of The
+    Actuary East Africa. I write about new product ideas, revamps of existing
+    ones, comparisons between Kenya, East Africa and South Africa, and the gap
+    analyses that sit underneath all of it. This is a working archive of
+    publications, regulatory comparisons, products and projects.
   </p>
   <div class="hero-meta">
     <div><span>Focus</span>Product and Pricing</div>
-    <div><span>Domain</span>Financial Services</div>
-    <div><span>Updated</span>2026</div>
+    <div><span>Domain</span>Financial Services and Climate Risk</div>
+    <div><span>Markets</span>Kenya, East Africa, South Africa</div>
+    <div><span>Updated</span>November 2026</div>
   </div>
 </header>
 
@@ -679,7 +698,7 @@
 <section id="work">
   <div class="section-head">
     <h2>Publications and Notes</h2>
-    <span class="count" id="workCount">13 of 13 visible</span>
+    <span class="count" id="workCount"></span>
   </div>
 
  <div class="tabs" role="tablist" id="primaryTabs">
@@ -688,6 +707,8 @@
   <button class="tab" data-filter="general">General Insurance</button>
   <button class="tab" data-filter="banking">Banking and Investment</button>
   <button class="tab" data-filter="esg">ESG</button>
+  <button class="tab" data-filter="policy">Regulation and Policy</button>
+  <button class="tab" data-filter="markets">Markets</button>
   <button class="tab" data-filter="academia">Academia</button>
 </div>
 
@@ -764,6 +785,26 @@
       <div class="pub-year">2025</div>
     </li>
 
+    <li class="pub" data-category="general">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">General Insurance · Health</div>
+        <h3 class="pub-title"><span class="pub-pending">Momentum Health's 2026 revamp, read against East African health insurers</span><span class="pub-status">Draft</span></h3>
+        <p class="pub-desc">Income banded pricing, provider choice as the price lever and rewards wrapped around cover. What the South African redesign did and which parts would transfer to Kenyan and regional medical cover.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="general">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">General Insurance · Micro-insurance</div>
+        <h3 class="pub-title"><span class="pub-pending">SwapCover and BodaShield: embedded cover for electric boda bodas</span><span class="pub-status">Pitch</span></h3>
+        <p class="pub-desc">An embedded micro-insurance concept for East Africa's electric motorcycle taxi sector, built around battery swaps and the rider's working day.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
     <li class="pub" data-category="banking">
       <div class="pub-num"></div>
       <div class="pub-main">
@@ -789,7 +830,107 @@
       <div class="pub-main">
         <div class="pub-cat">ESG</div>
         <h3 class="pub-title"><a href="#">East Africa climate-adjusted life insurance pricing</a></h3>
-        <p class="pub-desc">Standard life insurance pricing assumes that future mortality and morbidity rates can be projected from historical trends. Climate change breaks that assumption. Heat stress, vector-borne disease expansion, air quality degradation, food and water insecurity; these introduce non-linear,geographically differentiated shocks that traditional actuarial tables don't capture</p>
+        <p class="pub-desc">Standard life insurance pricing assumes that future mortality and morbidity rates can be projected from historical trends. Climate change breaks that assumption. Heat stress, vector-borne disease expansion, air quality degradation, food and water insecurity; these introduce non-linear,geographically differentiated shocks that traditional actuarial tables don't capture.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="esg">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">ESG · MSc Research</div>
+        <h3 class="pub-title"><span class="pub-pending">Translating climate risk into pricing for East African financial markets</span><span class="pub-status">In progress</span></h3>
+        <p class="pub-desc">Adapting the ASSA climate mortality and morbidity framework to Kenya, Tanzania and Uganda, where drought, flood driven disease and food insecurity are primary pathways. A second strand links drought indices to default risk in land secured lending.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="policy">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Regulation and Policy · Pensions</div>
+        <h3 class="pub-title"><span class="pub-pending">Pension investment limits: Regulation 28 against Kenya, Uganda, Tanzania and Rwanda</span><span class="pub-status">First pass</span></h3>
+        <p class="pub-desc">A clause by clause comparison of what retirement funds may hold in each market, with South Africa's Regulation 28 as the benchmark and the gaps that follow from it.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="policy">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Regulation and Policy · Insurance</div>
+        <h3 class="pub-title"><span class="pub-pending">Insurance capital, solvency and reinsurance: SAM against four East African regimes</span><span class="pub-status">First pass</span></h3>
+        <p class="pub-desc">Uganda, Tanzania and Rwanda rewrote their capital rules between 2025 and 2026. This sets each regime, and Kenya's, against South Africa's SAM standards on capital, reserving and reinsurance retention.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="policy">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Regulation and Policy · ERM</div>
+        <h3 class="pub-title"><span class="pub-pending">ORSA, risk based capital and compound Kenyan stress scenarios</span><span class="pub-status">Working party notes</span></h3>
+        <p class="pub-desc">Discussion points for the TASK ERM Working Party: a lean ORSA for boards, tying capital buffers to risk appetite rather than IRA minimums, and testing drought and inflation together rather than one at a time.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="policy">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Regulation and Policy · Public Finance</div>
+        <h3 class="pub-title"><span class="pub-pending">Parliamentary Budget Offices: Kenya and South Africa compared</span><span class="pub-status">Draft</span></h3>
+        <p class="pub-desc">How the two offices were set up, who they serve and how much power each parliament has over the budget, with a worked example of following education spending through both.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="policy">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Regulation and Policy · Currency</div>
+        <h3 class="pub-title"><span class="pub-pending">Currency valuation and consumer protection: the shilling and the rand</span><span class="pub-status">Draft</span></h3>
+        <p class="pub-desc">How each currency is valued against the dollar, why it matters when inputs are priced in dollars and goods are sold locally, and what protection consumers in each country actually have.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="policy">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Regulation and Policy · Health Security</div>
+        <h3 class="pub-title"><span class="pub-pending">Should Kenya host an Ebola quarantine facility? An ERM cost benefit analysis</span><span class="pub-status">Version 6</span></h3>
+        <p class="pub-desc">Applies the SEIR Poisson framework to the 2026 Bundibugyo outbreak. Once ground truth on screening and importation was applied, the result moved from conditional hosting to declining the facility.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="markets">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Markets · Consumer Goods</div>
+        <h3 class="pub-title"><span class="pub-pending">Wheat product diversification: lessons from South Africa for East Africa</span><span class="pub-status">Draft</span></h3>
+        <p class="pub-desc">South Africa turned one commodity into dozens of products by price point, health claim and shelf life. What East African millers, bakers and retailers could adopt first.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="markets">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Markets · Payments and Transport</div>
+        <h3 class="pub-title"><span class="pub-pending">Transport cards and cross border top ups: South Africa to Kenya</span><span class="pub-status">Draft</span></h3>
+        <p class="pub-desc">MyCiTi, Gautrain and Rea Vaya run on stored value cards while matatus still run on cash and M-Pesa. Three business angles, including a Nairobi parent topping up a Cape Town student's fares.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="markets">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Markets · Education</div>
+        <h3 class="pub-title"><span class="pub-pending">The university gap between Kenya and South Africa</span><span class="pub-status">Draft</span></h3>
+        <p class="pub-desc">Entry, credit frameworks, assessment and teaching support at a Kenyan university set against UCT, and what it would take to close the gap.</p>
       </div>
       <div class="pub-year">2026</div>
     </li>
@@ -829,7 +970,17 @@
       <div class="pub-main">
         <div class="pub-cat">Academia</div>
         <h3 class="pub-title"><a href="articles/ArdhiGuard_1.pdf">ArdhiGuard: An AI-Actuarial Framework for Predicting and Preventing Land Loss Through Loan Default in Kenya</a></h3>
-        <p class="pub-desc">An integrated framework combining machine learning with actuarial pricing to predict loan default risk and prevent land loss, with application to Kenya's land-secured lending market.</p>
+        <p class="pub-desc">An integrated framework combining machine learning with actuarial pricing to predict loan default risk and prevent land loss, with application to Kenya's land-secured lending market. Submitted to the TASK Annual Convention 2026.</p>
+      </div>
+      <div class="pub-year">2026</div>
+    </li>
+
+    <li class="pub" data-category="academia">
+      <div class="pub-num"></div>
+      <div class="pub-main">
+        <div class="pub-cat">Academia · Economics</div>
+        <h3 class="pub-title"><span class="pub-pending">Discussion dossier for the REFA UCT Pluralism Symposium</span><span class="pub-status">Symposium paper</span></h3>
+        <p class="pub-desc">Statistical benchmarks and pain point questions prepared for the Rethinking Economics for Africa symposium at the UCT School of Economics, 31 October to 1 November 2026.</p>
       </div>
       <div class="pub-year">2026</div>
     </li>
@@ -854,49 +1005,49 @@
         <div class="product-category">Individual · Retail</div>
         <h4 class="product-name">Whole of Life</h4>
         <p class="product-summary">Permanent life coverage with level premiums and lifelong protection, available in both KES and USD for East African markets.</p>
-        <a href="products/whole-of-life-spec.pdf" class="product-link">Product Specification</a>
+        <span class="product-link">Specification on request</span>
       </div>
 
       <div class="product-card">
         <div class="product-category">Individual · Retail</div>
         <h4 class="product-name">Level Term Assurance</h4>
         <p class="product-summary">Fixed-term life protection with level premiums for 10 to 25 year terms, available in KES and USD with guaranteed payouts.</p>
-        <a href="products/level-term-spec.pdf" class="product-link">Product Specification</a>
+        <span class="product-link">Specification on request</span>
       </div>
 
       <div class="product-card">
         <div class="product-category">Individual · Retail</div>
         <h4 class="product-name">Investure</h4>
         <p class="product-summary">Investment-linked endowment-style savings product with protection benefits, available in KES and USD for medium to long-term wealth building.</p>
-        <a href="products/investure-spec.pdf" class="product-link">Product Specification</a>
+        <span class="product-link">Specification on request</span>
       </div>
 
       <div class="product-card">
         <div class="product-category">Individual · Retail</div>
         <h4 class="product-name">Endowment Product</h4>
         <p class="product-summary">Savings-linked life cover combining protection with profit participation and maturity benefits, available in KES and USD versions.<span class="product-status">Priced, not yet launched</span></p>
-        <a href="products/endowment-product-spec.pdf" class="product-link">Product Specification</a>
+        <span class="product-link">Specification on request</span>
       </div>
 
       <div class="product-card">
         <div class="product-category">Individual · Retail</div>
         <h4 class="product-name">Thabiti Life Plan</h4>
         <p class="product-summary">Flexible protection and savings combination offering term life cover with optional savings components in KES and USD.</p>
-        <a href="products/thabiti-spec.pdf" class="product-link">Product Specification</a>
+        <span class="product-link">Specification on request</span>
       </div>
 
       <div class="product-card">
         <div class="product-category">Individual · Retail</div>
         <h4 class="product-name">Critical Illness Cover</h4>
         <p class="product-summary">Lump-sum protection against major health events like cancer and stroke, available standalone or as a rider to life policies.<span class="product-status">Priced, not yet launched</span></p>
-        <a href="products/critical-illness-spec.pdf" class="product-link">Product Specification</a>
+        <span class="product-link">Specification on request</span>
       </div>
 
       <div class="product-card">
         <div class="product-category">Individual · Retail</div>
         <h4 class="product-name">Funeral Expense Cover</h4>
         <p class="product-summary">Affordable final expense protection designed for accessibility, ensuring dignity in passing across income segments.<span class="product-status">Priced, not yet launched</span></p>
-        <a href="products/funeral-spec.pdf" class="product-link">Product Specification</a>
+        <span class="product-link">Specification on request</span>
       </div>
 
     </div>
@@ -911,14 +1062,14 @@
         <div class="product-category">Retirement · Income</div>
         <h4 class="product-name">Annuity</h4>
         <p class="product-summary">Guaranteed income for life from retirement savings, providing reliable pension payments with longevity risk protection.</p>
-        <a href="products/annuity-spec.pdf" class="product-link">Product Specification</a>
+        <span class="product-link">Specification on request</span>
       </div>
 
       <div class="product-card">
         <div class="product-category">Retirement · Decumulation</div>
         <h4 class="product-name">Income Drawdown Fund</h4>
         <p class="product-summary">Flexible retirement income solution allowing periodic withdrawals from invested lump sum with minimum 4% guaranteed return plus bonuses.</p>
-        <a href="products/income-drawdown-spec.pdf" class="product-link">Product Specification</a>
+        <span class="product-link">Specification on request</span>
       </div>
 
     </div>
@@ -933,14 +1084,14 @@
         <div class="product-category">Group · Loan Protection</div>
         <h4 class="product-name">Group Mortgage Protection Policy</h4>
         <p class="product-summary">Specialized loan protection for mortgages and high-value loans, covering death, disability, and job loss to protect lenders and borrowers.</p>
-        <a href="products/group-mortgage-spec.pdf" class="product-link">Product Specification</a>
+        <span class="product-link">Specification on request</span>
       </div>
 
       <div class="product-card">
         <div class="product-category">Group · Loan Protection</div>
         <h4 class="product-name">Group Credit Life</h4>
         <p class="product-summary">Credit line protection for short-term loans covering death, disability, and unemployment, with optional critical illness and funeral benefits.</p>
-        <a href="products/group-credit-spec.pdf" class="product-link">Product Specification</a>
+        <span class="product-link">Specification on request</span>
       </div>
 
     </div>
@@ -955,21 +1106,68 @@
         <div class="product-category">Infrastructure · Customer Tool</div>
         <h4 class="product-name">Automated PRS Calculator</h4>
         <p class="product-summary">Interactive tool for Personal Retirement Scheme projections, enabling customers to model contributions, returns, and retirement income scenarios.</p>
-        <a href="products/prs-calculator-spec.pdf" class="product-link">Documentation</a>
+        <span class="product-link">Specification on request</span>
       </div>
 
       <div class="product-card">
         <div class="product-category">Infrastructure · Automation</div>
         <h4 class="product-name">Reinsurance Automation Tool</h4>
         <p class="product-summary">Internal systems and automation for streamlined reinsurance placement, underwriting, and settlement processes.</p>
-        <a href="products/reinsurance-automation-spec.pdf" class="product-link">Documentation</a>
+        <span class="product-link">Specification on request</span>
       </div>
 
       <div class="product-card">
         <div class="product-category">Infrastructure · Automation</div>
         <h4 class="product-name">Valuation Data Automation Tool</h4>
         <p class="product-summary">Automated data pipeline for actuarial valuations, enhancing accuracy, auditability, and timeliness of financial and actuarial reporting.</p>
-        <a href="products/valuation-automation-spec.pdf" class="product-link">Documentation</a>
+        <span class="product-link">Specification on request</span>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════ PROJECTS ═══════════════ -->
+<section id="projects">
+  <div class="section-head">
+    <h2>Projects</h2>
+    <span class="count">Builds and Ventures</span>
+  </div>
+
+  <div class="products-subcategory">
+    <h3>Builds</h3>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <div class="product-category">Health · Student Wellness</div>
+        <h4 class="product-name">MindBridge</h4>
+        <p class="product-summary">AI powered audio journaling for university students, piloted around UCT's Student Wellness waitlists. Live transcription, five support personas and a safety classifier that surfaces human help when distress signals appear.<span class="product-status">Working prototype</span></p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-category">Fintech · Comparison</div>
+        <h4 class="product-name">East Africa Financial Product Platform</h4>
+        <p class="product-summary">A consumer comparison platform for Kenya, Uganda and Tanzania covering bank, insurance, mobile money and SACCO products, with USSD access planned for feature phones.<span class="product-status">Prototype</span></p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-category">Investment · Quantitative</div>
+        <h4 class="product-name">JSE Quant Pipeline</h4>
+        <p class="product-summary">A Python pipeline for JSE equities with a momentum backtest, data unit error repair and significance testing, run alongside a R100,000 simulated portfolio for the UCT Group Investment Project.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="products-subcategory">
+    <h3>Consulting</h3>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <div class="product-category">Regulatory · Actuarial</div>
+        <h4 class="product-name">East Africa Financial Services Consulting</h4>
+        <p class="product-summary">Regulatory and actuarial work across Kenya, Uganda, Tanzania and Rwanda. A living register of acts and prudential rules, with South Africa as the benchmark, and clause level comparisons that show where each market falls short.<span class="product-status">Building</span></p>
       </div>
 
     </div>
@@ -988,16 +1186,23 @@
     <div class="about-text">
       <p>
         I am Ndegwa, a student actuary with a focus on product development
-        and pricing across life insurance, general insurance, and banking
-        and investment products.
+        and pricing across life insurance, general insurance and banking
+        and investment products. I grew up in the semi arid Rift Valley,
+        where drought is a baseline condition, and that is where my interest
+        in climate risk and pricing comes from.
       </p>
+      <ul class="role-list">
+        <li><strong>Pricing and product development.</strong> Life insurance, Nairobi. Individual, retirement and group products, plus the tools behind them.</li>
+        <li><strong>Assistant Editor in Chief, The Actuary East Africa.</strong> The Actuarial Society of Kenya's magazine, read in about 20 countries.</li>
+        <li><strong>TASK Convention.</strong> Scientific and review committee, and member of the TASK ERM, Life and Reinsurance Working Party.</li>
+        <li><strong>University of Cape Town.</strong> Actuarial graduate studies, with the MSc in Climate Change.</li>
+        <li><strong>Milliman and ARC.</strong> ASP scholar.</li>
+      </ul>
       <p>
-        This site has three sections. Publications contains my research, gap
-        analyses, pricing studies, and market comparisons across insurance
-        products. Products showcases the life insurance products I have priced
-        and developed, spanning individual protection, retirement solutions,
-        and group coverage. Academia holds my study notes and reading logs as
-        I work through the actuarial syllabus.
+        Publications holds my research, gap analyses, pricing studies and
+        regulatory comparisons. Products shows the life insurance products I
+        have priced and developed. Projects covers what I am building outside
+        the day job.
       </p>
       <p>
         If something here is useful, or you would like to discuss a product
@@ -1021,12 +1226,8 @@
         <a href="#">linkedin.com/in/ndegwa</a>
       </div>
       <div>
-        <span class="label">Writing</span>
-        <a href="#">Newsletter</a>
-      </div>
-      <div>
         <span class="label">Elsewhere</span>
-        <a href="#">GitHub</a>
+        <a href="https://github.com/vndegwa">GitHub</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1116,6 +1317,8 @@
   document.querySelectorAll('.nav-links a').forEach(a => {
     a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
   });
+
+  applyFilter();
 </script>
 
 </body>
